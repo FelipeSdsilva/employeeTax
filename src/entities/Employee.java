@@ -8,17 +8,20 @@ public class Employee {
 	private String office;
 	private Double salary;
 	private Double newSalary;
+	private Double tax;
 
 	public Employee() {
 	}
 
-	public Employee(Long id, String name, String lastName, String office, Double salary, Double newSalary) {
+	public Employee(Long id, String name, String lastName, String office, Double salary, Double newSalary, Double tax) {
+		super();
 		this.id = id;
 		this.name = name;
 		this.lastName = lastName;
 		this.office = office;
 		this.salary = salary;
 		this.newSalary = newSalary;
+		this.tax = tax;
 	}
 
 	public Long getId() {
@@ -68,7 +71,20 @@ public class Employee {
 	public void setNewSalary(Double newSalary) {
 		this.newSalary = newSalary;
 	}
+	
+	public Double getTax() {
+		return tax;
+	}
 
+
+	public void setTax(Double tax) {
+		this.tax = tax;
+	}
+
+	public void increaseSalary(double percentage) {
+		salary += salary * percentage / 100.0;
+		}
+	
 	@Override
 	public String toString() {
 		return "Employee [ id=" + id 
