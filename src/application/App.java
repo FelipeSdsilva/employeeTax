@@ -6,6 +6,7 @@ import java.util.Locale;
 import java.util.Scanner;
 
 import entities.Employee;
+import resources.Menu;
 
 public class App {
 
@@ -14,17 +15,17 @@ public class App {
 		Locale.setDefault(Locale.US);
 		Scanner sc = new Scanner(System.in);
 		
-		char cont;
+		int cont;
 		List<Employee> employeers = new ArrayList<>();
-			
-		do {
-			System.out.println("------- Welcome the System Pay of tax for employeers --------");
-			
-			
-			cont = sc.next().charAt(0);
-		} while (cont != 'n' && cont != 'N');
 		
-		System.out.println("------- Thanks for using until next time --------");
+	
+		
+		
+			Menu.initialMenu();
+			
+			
+			
+		
 
 		sc.close();
 	}
