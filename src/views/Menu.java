@@ -1,4 +1,4 @@
-package resources;
+package views;
 
 public class Menu {
 
