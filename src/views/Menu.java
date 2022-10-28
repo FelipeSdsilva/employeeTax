@@ -28,63 +28,95 @@ public class Menu {
 				+ "\n----------------- 9-) End System ----------------------------");
 		System.out.print("------------------------ ");
 		cont = in.nextInt();
-		if(cont == 1) {
-			registerEmployee(cont);
-		}
+		moveInMenu(cont);
+
 	}
 
-	public void registerEmployee(int menuMove) {
+	private void registerEmployee() {
 
-		if (menuMove == 1) {
-			System.out.println("----------------- 1-) Employee registration -----------------");
-			System.out.print("How many employees be register? ");
-			cont = in.nextInt();
-			for (int i = 0; i < cont; i++) {
-				System.out.print("\n-------- Id: ");
-				id = in.nextLong();
-				System.out.print("\n-------- Name: ");
-				in.nextLine();
-				name = in.nextLine();
-				System.out.print("\n-------- LastName: ");
-				lastName = in.nextLine();
-				System.out.print("\n-------- Office: ");
-				office = in.nextLine();
-				System.out.print("\n------- Salary: R$");
-				salary = in.nextDouble();
+		System.out.println("\n------------------- Employee registration -------------------");
+		System.out.print("How many employees be register? ");
 
-				Employee emp = new Employee();
-				emp.setId(id);
-				emp.setName(name);
-				emp.setLastName(lastName);
-				emp.setOffice(office);
-				emp.setSalary(salary);
+		cont = in.nextInt();
 
-				employeers.add(emp);
+		for (int i = 0; i < cont; i++) {
+			System.out.print("\n-------- Id: ");
+			id = in.nextLong();
+			System.out.print("\n-------- Name: ");
+			in.nextLine();
+			name = in.nextLine();
+			System.out.print("\n-------- LastName: ");
+			lastName = in.nextLine();
+			System.out.print("\n-------- Office: ");
+			office = in.nextLine();
+			System.out.print("\n------- Salary: R$");
+			salary = in.nextDouble();
 
-			}
-			System.out.print("You have exit ?( 0=y/ 1=n) \n");
-			cont = in.nextInt();
-			if (cont == 0) {
-				initialMenu();
-			} else {
-				registerEmployee(cont);
-			}
-		} else if (menuMove == 2)
+			Employee emp = new Employee();
+			emp.setId(id);
+			emp.setName(name);
+			emp.setLastName(lastName);
+			emp.setOffice(office);
+			emp.setSalary(salary);
 
-		{
+			employeers.add(emp);
+
+		}
+
+		System.out.print("Do you want to go back to the inital menu or register more employeers ?"
+				+ "\n(0 = Initial Menu/1 = register new Employee/2 = Exit program)  \n");
+		cont = in.nextInt();
+		backToMenuOrExitSysytem(cont); 
+	}
+
+	private void incomeTax() {
+		System.out.println("\n------------------ Income tax ------------------------------");
+		System.out.print("How id ");
+		System.out.print("Do you want to go back to the inital menu or register more employeers ?"
+				+ "\n(0 = Initial Menu/1 = register new Employee/2 = Exit program)  \n");
+	}
+
+	private void increaseSalary() {
+		System.out.println("\n------------------- Encrease salary -------------------------");
+	}
+
+	private void listEmployee() {
+		System.out.println("\n------------------- Employeers list -------------------------");
+	}
+
+	private void mensageEnd() {
+		System.out.println("\n------------- Thanks for using until next time! -------------");
+	}
+
+	private void moveInMenu(int moveMenu) {
+		switch (moveMenu) {
+		case 1:
+			registerEmployee();
+			break;
+		case 2:
 			incomeTax();
-		} else if (menuMove == 3) {
-			System.out.println("----------------- 3-) Encrease salary -----------------------");
+			break;
+		case 3:
+			increaseSalary();
+			break;
+		case 4:
+			listEmployee();
+			break;
+		case 9:
+			mensageEnd();
+			break;
+
 		}
-
 	}
-
-	public static void incomeTax() {
-		System.out.println("----------------- 2-) Income tax ----------------------------");
+	private void backToMenuOrExitSysytem(int backMenu) {
+		if (cont == 0)
+			moveInMenu(cont);
+		else if (cont == 1){
+			initialMenu();
+		}else if(cont == 2) {
+			mensageEnd();
+		}else {
+			System.out.println("Error in input!");
+		} 
 	}
-
-	public static void mensageEnd() {
-		System.out.println("------------- Thanks for using until next time! -------------");
-	}
-
 }
