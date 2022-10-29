@@ -7,7 +7,6 @@ public class Employee {
 	private String lastName;
 	private String office;
 	private Double salary;
-	private Double newSalary;
 	private Double tax;
 
 	public Employee() {
@@ -57,16 +56,11 @@ public class Employee {
 	public Double getSalary() {
 		return salary;
 	}
-	
+
 	public void setSalary(Double salary) {
 		this.salary = salary;
 	}
 
-	public Double getNewSalary() {
-		return newSalary;
-	}
-
-	
 	public Double getTax() {
 		return tax;
 	}
@@ -75,18 +69,19 @@ public class Employee {
 		this.tax = tax;
 	}
 
-	public void increaseSalary(double percentage) {
-		newSalary = (salary + salary) * percentage / 100.0;
+	public double netSalary() {
+		return salary - tax;
 		}
+
 	
+	public void increaseSalary(double percentage) {
+		salary += salary * percentage / 100.0;
+	}
+
 	@Override
 	public String toString() {
-		return "Employee [ id=" + id 
-				+ ", name=" + name 
-				+ ", lastName=" + lastName 
-				+ ", office=" + office 
-				+ ", salary="+ salary 
-				+ ", newSalary=" + newSalary + "]";
+		return "Employee [ id=" + id + ", name=" + name + ", lastName=" + lastName + ", office=" + office + ", salary="
+				+ salary + "]";
 	}
 
 }

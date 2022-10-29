@@ -10,8 +10,39 @@ public class Menu {
 
 	Scanner in = new Scanner(System.in);
 
+	String menuInitial = """
+			------- Welcome the System Pay of tax for employeers --------
+			------------- What do you have for me today? ----------------
+			----------------- 1-) Employee registration -----------------
+			----------------- 2-) Income tax ----------------------------
+			----------------- 3-) Encrease salary -----------------------
+			----------------- 4-) Employeers list -----------------------
+			----------------- 9-) End System ----------------------------
+			------------------------ """;
+	String empRegis = """
+
+			------------------- Employee registration -------------------
+			            How many employees be register? """;
+
+	String listEmployee = """
+			------------------- Employeers list -------------------------
+			1-) List all employeers:
+			""";
+	String notRegister = """
+
+			You not have employee register !
+			Register firsth a new Employee !
+			""";
+
+	String thisEnd = """
+
+			Do you want to go back to the inital menu ?
+			(0 = Initial Menu/1 = Exit program) :
+			""";
+
 	public int cont;
 	public Long id;
+	Integer idPos;
 	public String name, lastName, office;
 	public double salary;
 
@@ -19,14 +50,7 @@ public class Menu {
 
 	public void initialMenu() {
 
-		System.out.println("------- Welcome the System Pay of tax for employeers --------"
-				+ "\n------------- What do you have for me today? ----------------"
-				+ "\n----------------- 1-) Employee registration -----------------"
-				+ "\n----------------- 2-) Income tax ----------------------------"
-				+ "\n----------------- 3-) Encrease salary -----------------------"
-				+ "\n----------------- 4-) Employeers list -----------------------"
-				+ "\n----------------- 9-) End System ----------------------------");
-		System.out.print("------------------------ ");
+		System.out.print(menuInitial);
 		cont = in.nextInt();
 		moveInMenu(cont);
 
@@ -34,9 +58,7 @@ public class Menu {
 
 	private void registerEmployee() {
 
-		System.out.println("\n------------------- Employee registration -------------------");
-		System.out.print("How many employees be register? ");
-
+		System.out.print(empRegis);
 		cont = in.nextInt();
 
 		for (int i = 0; i < cont; i++) {
@@ -63,29 +85,67 @@ public class Menu {
 
 		}
 
-		System.out.print("Do you want to go back to the inital menu or register more employeers ?"
-				+ "\n(0 = Initial Menu/1 = register new Employee/2 = Exit program)  \n");
+		optionPane();
 		cont = in.nextInt();
-		backToMenuOrExitSysytem(cont); 
+		backToMenuOrExitSysytem(cont);
 	}
 
 	private void incomeTax() {
 		System.out.println("\n------------------ Income tax ------------------------------");
-		System.out.print("How id ");
-		System.out.print("Do you want to go back to the inital menu or register more employeers ?"
-				+ "\n(0 = Initial Menu/1 = register new Employee/2 = Exit program)  \n");
+		listNull();
+
+		System.out.print("Enter the discont: ");
+		
+		double discount = in.nextDouble();
+		
+		employeers.get(idPos).setTax(discount);
+		
+		System.out.println("Update discount the salary sucessfull!");
+		
+		optionPane();
+		cont = in.nextInt();
+		backToMenuOrExitSysytem(cont);
+
 	}
 
 	private void increaseSalary() {
 		System.out.println("\n------------------- Encrease salary -------------------------");
+
+		listNull();
+
+		System.out.print("Enter the percentage: ");
+
+		double percentage = in.nextDouble();
+
+		employeers.get(idPos).increaseSalary(percentage);
+
+		System.out.println("Update salary sucessfull!");
+
+		optionPane();
+		cont = in.nextInt();
+		backToMenuOrExitSysytem(cont);
 	}
 
 	private void listEmployee() {
-		System.out.println("\n------------------- Employeers list -------------------------");
+		System.out.println(listEmployee);
+		cont = in.nextInt();
+		if (cont == 1) {
+			for (Employee employee : employeers) {
+				System.out.println(employee.toString() + "\n");
+			}
+		}
+
+		optionPane();
+		cont = in.nextInt();
+		backToMenuOrExitSysytem(cont);
 	}
 
 	private void mensageEnd() {
 		System.out.println("\n------------- Thanks for using until next time! -------------");
+	}
+
+	private void optionPane() {
+		System.out.print(thisEnd);
 	}
 
 	private void moveInMenu(int moveMenu) {
@@ -108,15 +168,38 @@ public class Menu {
 
 		}
 	}
+
 	private void backToMenuOrExitSysytem(int backMenu) {
-		if (cont == 0)
-			moveInMenu(cont);
-		else if (cont == 1){
+		if (cont == 0) {
 			initialMenu();
-		}else if(cont == 2) {
+		} else if (cont == 1) {
 			mensageEnd();
-		}else {
+		} else {
 			System.out.println("Error in input!");
-		} 
+			initialMenu();
+		}
+	}
+
+	private Integer findById(List<Employee> list, int id) {
+		for (int i = 0; i < list.size(); i++) {
+			if (list.get(i).getId() == id) {
+				return i;
+			}
+		}
+		return null;
+	}
+
+	private void listNull() {
+		if (employeers.isEmpty()) {
+			System.out.println(empRegis);
+			registerEmployee();
+		} else {
+			System.out.print("How id: ");
+			cont = in.nextInt();
+			idPos = findById(employeers, cont);
+			if (id == null) {
+				System.out.println("It's id not excsiti, pleas register id and employee");
+			}
+		}
 	}
 }
