@@ -71,11 +71,12 @@ public class Employee {
 
 	public double netSalary() {
 		return salary - tax;
-		}
+	}
 
-	
 	public void increaseSalary(double percentage) {
-		salary += salary * percentage / 100.0;
+		if (percentage <= 0) {
+			salary += salary * percentage / 100.0;
+		}
 	}
 
 	@Override
